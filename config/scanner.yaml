@@ -1,0 +1,33 @@
+aws:
+  region: ap-south-1
+
+scanner:
+  monitored_ports: [22, 80, 443, 3389]
+  monitored_protocols: [tcp]
+  source_cidrs: ["0.0.0.0/0", "::/0"]
+  include_stopped_instances: false
+  port_names:
+    22: SSH
+    80: HTTP
+    443: HTTPS
+    3389: RDP
+  severity:
+    critical_ports: [22, 3389]
+    high_ports: [80, 443]
+    medium_ports: []
+    low_ports: []
+    default_severity: MEDIUM
+
+report:
+  output_directory: reports
+  formats: [html, csv, xlsx]
+  overwrite_existing: false
+  team_tag_key: Team
+  owner_tag_key: Owner
+  environment_tag_key: Environment
+
+email:
+  enabled: true
+  sender: ""
+  recipients: []
+  subject_prefix: "Daily AWS Security Scan"
